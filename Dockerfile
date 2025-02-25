@@ -33,7 +33,7 @@ COPY --from=base /app/node_modules ./node_modules
 
 # Copy the package.json file from the base stage.
 COPY --from=base /app/package.json ./package.json
-
+COPY --from=base /app/public ./public
 # Copy the .next folder from the base stage.
 COPY --from=base /app/.next ./.next
 
