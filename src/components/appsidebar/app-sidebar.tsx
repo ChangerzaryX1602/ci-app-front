@@ -56,10 +56,10 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenuButton asChild>
-            <a className="flex items-center space-x-2" href="/chat/new">
+            <Link className="flex items-center space-x-2" href="/chat/new">
               <SquarePen />
               <span>New chat</span>
-            </a>
+            </Link>
           </SidebarMenuButton>
         </SidebarGroup>
         <SidebarGroup>
@@ -69,9 +69,9 @@ export function AppSidebar() {
               {mockChats.map((mockChats) => (
                 <SidebarMenuItem key={mockChats.id}>
                   <SidebarMenuButton asChild>
-                    <a href={mockChats.url}>
+                    <Link href={mockChats.url}>
                       <span>{mockChats.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
