@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
 
     // Create client and make call
     const client = new AiService(
-      "172.210.65.107:50051",
+      process.env.CHAT_ENDPOINT as string,
       grpc.credentials.createInsecure()
     );
 
