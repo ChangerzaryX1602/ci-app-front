@@ -51,7 +51,7 @@ export function AppSidebar() {
   return (
     <Sidebar >
       <SidebarHeader>
-        <div><Link href={"/"}>Rag bot</Link></div>
+        <Link href={"/"}>Rag bot</Link>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
