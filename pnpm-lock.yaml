@@ -38,6 +38,9 @@ dependencies:
   clsx:
     specifier: ^2.1.1
     version: 2.1.1
+  ldrs:
+    specifier: ^1.1.5
+    version: 1.1.5
   lucide-react:
     specifier: ^0.482.0
     version: 0.482.0(react@19.0.0)
@@ -3274,6 +3277,10 @@ packages:
     dependencies:
       language-subtag-registry: 0.3.23
     dev: true
+
+  /ldrs@1.1.5:
+    resolution: {integrity: sha512-ekwnCXHs87YL/w3bigQXbwlVFgJH95B+xX6Pc1s7NIIEVZYBcGV9rN99/bkPZfLo2Bue1bGvP/4tMoJYjwxbqg==}
+    dev: false
 
   /levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
