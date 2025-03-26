@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package ai.api.proto;
+
+option go_package = "api/pb";
+
+service AiService {
+    rpc Ask(AiRequest) returns (AiResponse) {}
+}
+message AiRequest {
+    string question = 1;
+}
+message AiResponse {
+    string answer = 1;
+}
