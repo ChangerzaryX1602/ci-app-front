@@ -112,31 +112,37 @@ const Help = () => {
       <div className="text-3xl font-bold text-purple-600 aa">Help</div>
       <p className="m-3">Welcome! We're here to help you solve problems and answer questions.</p>
 
-        <h2 className="font-bold text-lg m-3 mt-10">Frequently Asked Questions</h2>
-      <div className=" mt-s8 flex flex-col items-center text-center">
 
-        <div className="text-left max-w-3xl text-sm">
-          <p>
-           <span className="font-semibold mb-2"> Q: </span> What are the standard registration procedures?
-          </p>
-          <div className="flex items-start">
-            <p className="font-semibold mr-2">A: </p>
-            <ul className="list-disc ml-4 space-y-2 text-left">
-              <li>
-                Registration must be completed via-
-                <a href="https://reg.kku.ac.th/" className="underline text-blue-600 hover:text-blue-800">
-                  https://reg.kku.ac.th/
-                </a>, where students can register for 1-15 credits.
-              </li>
-              <li>
-                Confirm the registration and make payment through a bank or via QR code, as specified on the fee invoice. This must be done within the dates and times specified in the university's academic calendar, which is announced annually.
-              </li>
-            </ul>
-          </div>
+      <div className="border-2 border-gray-300 rounded-lg overflow-hidden max-w-3xl mx-auto">
+      <h2 className="font-bold text-lg underline text-center py-2 bg-gray-100 border-b border-gray-300">
+        Frequently Asked Questions
+      </h2>
+      <div className="p-5 text-left">
+        <p>
+          <span className="font-semibold mb-2">Q: </span> What are the standard registration procedures?
+        </p>
+        <div className="flex items-start mt-2">
+          <p className="font-semibold mr-2">A: </p>
+          <ul className="list-disc ml-4 space-y-2 text-left">
+            <li>
+              Registration must be completed via-
+              <a 
+                href="https://reg.kku.ac.th/" 
+                className="underline text-blue-600 hover:text-blue-800 ml-1"
+              >
+                https://reg.kku.ac.th/
+              </a>, where students can register for 1-15 credits.
+            </li>
+            <li>
+              Confirm the registration and make payment through a bank or via QR code, as specified on the fee invoice. This must be done within the dates and times specified in the university's academic calendar, which is announced annually.
+            </li>
+          </ul>
         </div>
       </div>
+    </div>
+      
          
-      <h2 className="font-bold text-lg m-3 mt-10">Categories</h2>
+      <h2 className="font-bold text-lg underline mt-3">Categories</h2>
       <Accordion type="single" collapsible>
         {items.map((item) => (
           <AccordionItem key={item.value} value={item.value}>
@@ -146,7 +152,7 @@ const Help = () => {
         ))}
       </Accordion>
 
-      <h2 className="font-bold text-lg m-3 mt-10">Contact KKU</h2>
+      <h2 className="font-bold text-lg underline mt-3">Contact KKU</h2>
       <p>Email: reg@kku.ac.th</p>
     </div>
   );
