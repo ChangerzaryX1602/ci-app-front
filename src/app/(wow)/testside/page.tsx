@@ -29,10 +29,10 @@ const Testside = () => {
   const [inputMessage, setInputMessage] = useState("");
   // const [response, setResponse] = useState<string>("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   // For handle error hydation
   const [isClient, setIsClient] = useState(false);
+  const [botIsAnswer, setBotIsAnswer] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -52,10 +52,10 @@ const Testside = () => {
   }, [messages]);
 
   const handleSendMessage = async () => {
-    if (inputMessage.trim() === "") return;
+    if (inputMessage.trim() === "" || botIsAnswer) return;
 
     setLoading(true);
-    setError("");
+    setBotIsAnswer(true);
     // Clear input
     setInputMessage("");
 
@@ -67,6 +67,12 @@ const Testside = () => {
     };
 
     setMessages((prevMessages) => [...prevMessages, userMessage]);
+
+    const botMessage = {
+      id: messageIdCounter + 1,
+      text: "",
+      sender: "bot",
+    };
 
     try {
       const res = await fetch("/api/chat", {
@@ -83,25 +89,19 @@ const Testside = () => {
       }
 
       const data: ChatResponse = await res.json();
-
-      const botMessage = {
-        id: messageIdCounter + 1,
-        text: data.answer,
-        sender: "bot",
-      };
-
-      setMessageIdCounter(messageIdCounter + 2);
-      setMessages((prevMessages) => [...prevMessages, botMessage]);
+      botMessage.text = data.answer;
     } catch (err: any) {
-      setError(err.message || "Something went wrong");
+      botMessage.text = err.message;
       console.error("Error:", err);
     } finally {
+      setMessageIdCounter(messageIdCounter + 2);
+      setMessages((prevMessages) => [...prevMessages, botMessage]);
       setLoading(false);
+      setBotIsAnswer(false);
     }
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    // Send message on Enter key
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !botIsAnswer) {
       e.preventDefault();
       handleSendMessage();
     }
@@ -111,7 +111,7 @@ const Testside = () => {
     <div className="w-full flex flex-col items-center h-full">
       {isClient && (
         <>
-          <div className="w-full max-w-4xl flex-grow p-4 overflow-y-auto z-10">
+          <div className="w-full max-w-4xl flex-grow p-4 z-10">
             {messages.map((msg) => (
               <div
                 key={msg.id}
@@ -168,13 +168,6 @@ const Testside = () => {
               </div>
             </div>
           </div>
-          {/* <Image
-          src="landing-page\wave_notext_withComps.svg"
-          alt="wave_notext"
-          width={25}
-          height={25}
-          className="w-full bottom-0 absolute z-0"
-        /> */}
         </>
       )}
     </div>

@@ -27,7 +27,7 @@ const ChatNavBar = () => {
   }, []);
 
   return (
-    <div className={`w-full flex items-center h-14`}>
+    <div className="w-full flex items-center h-14 fixed top-0 left-0 right-0">
       {(!open || (mounted && isMobile)) && (
         <div className="px-2 block">
           <SidebarTrigger />
