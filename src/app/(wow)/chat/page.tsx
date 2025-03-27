@@ -11,35 +11,35 @@ const Page = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ question }),
-      });
+    // try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ question }),
+    });
 
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || "Failed to get response");
-      }
-
-      const data: ChatResponse = await res.json();
-      console.log("data", data);
-
-      setResponse(data.answer || JSON.stringify(data.answer));
-    } catch (err: any) {
-      setError(err.message || "Something went wrong");
-      console.error("Error:", err);
-    } finally {
-      setLoading(false);
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.error || "Failed to get response");
     }
+
+    const data: ChatResponse = await res.json();
+    console.log("data", data);
+
+    setResponse(data.answer || JSON.stringify(data.answer));
+    // } catch (err: Error) {
+    // setError(err.message || "Something went wrong");
+    // console.error("Error:", err);
+    // } finally {
+    setLoading(false);
+    // }
   };
 
   return (

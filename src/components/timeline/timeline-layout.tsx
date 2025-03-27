@@ -2,8 +2,6 @@ import {
   Timeline,
   TimelineItem,
   TimelineTitle,
-  TimelineDescription,
-  TimelineTime,
   TimelineHeader,
 } from "@/components/timeline/timeline";
 import { Link as ScrollLink } from "react-scroll";

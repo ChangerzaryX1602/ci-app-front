@@ -110,7 +110,7 @@ const Help = () => {
   return (
     <div id="help" className="mt-36 mb-36 text-center">
       <div className="text-3xl font-bold text-purple-600 aa">Help</div>
-      <p className="m-3">Welcome! We're here to help you solve problems and answer questions.</p>
+      <p className="m-3">Welcome! We&apos;re here to help you solve problems and answer questions.</p>
 
 
       <div className="border-2 border-gray-300 rounded-lg overflow-hidden max-w-3xl mx-auto">
@@ -134,7 +134,7 @@ const Help = () => {
               </a>, where students can register for 1-15 credits.
             </li>
             <li>
-              Confirm the registration and make payment through a bank or via QR code, as specified on the fee invoice. This must be done within the dates and times specified in the university's academic calendar, which is announced annually.
+              Confirm the registration and make payment through a bank or via QR code, as specified on the fee invoice. This must be done within the dates and times specified in the university&apos;s academic calendar, which is announced annually.
             </li>
           </ul>
         </div>

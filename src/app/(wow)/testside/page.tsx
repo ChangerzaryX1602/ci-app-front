@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { ThemeButton } from "@/components/button/theme-button";
 import { Bouncy } from "ldrs/react";
 import "ldrs/react/Bouncy.css";
 
@@ -74,31 +73,33 @@ const Testside = () => {
       sender: "bot",
     };
 
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ question: inputMessage }),
-      });
+    // try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ question: inputMessage }),
+    });
 
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || "Failed to get response");
-      }
-
-      const data: ChatResponse = await res.json();
-      botMessage.text = data.answer;
-    } catch (err: any) {
-      botMessage.text = err.message;
-      console.error("Error:", err);
-    } finally {
-      setMessageIdCounter(messageIdCounter + 2);
+    if (!res.ok) {
+      const errorData = await res.json();
+      botMessage.text = errorData.error;
       setMessages((prevMessages) => [...prevMessages, botMessage]);
-      setLoading(false);
-      setBotIsAnswer(false);
+      throw new Error(errorData.error || "Failed to get response");
     }
+
+    const data: ChatResponse = await res.json();
+    botMessage.text = data.answer;
+    // } catch (err: any) {
+    //   botMessage.text = err.message;
+    //   console.error("Error:", err);
+    // } finally {
+    setMessageIdCounter(messageIdCounter + 2);
+    setMessages((prevMessages) => [...prevMessages, botMessage]);
+    setLoading(false);
+    setBotIsAnswer(false);
+    // }
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !botIsAnswer) {

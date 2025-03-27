@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
-const Page = () => {
+const AuthHandler = () => {
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
 
@@ -20,9 +20,20 @@ const Page = () => {
     if (code) {
       handleAuth(code);
     }
-  }, []);
+  }, [code]);
 
-  return <div>Page</div>;
+  return null;
+};
+
+const Page = () => {
+  return (
+    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <AuthHandler />
+      </Suspense>
+      Page
+    </div>
+  );
 };
 
 export default Page;

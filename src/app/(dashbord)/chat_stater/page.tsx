@@ -7,9 +7,9 @@ import { ThemeButton } from "@/components/button/theme-button";
 import { Bouncy } from "ldrs/react";
 import "ldrs/react/Bouncy.css";
 
-interface ChatResponse {
-  answer: string;
-}
+// interface ChatResponse {
+//   answer: string;
+// }
 
 interface Message {
   id: number;
@@ -17,19 +17,19 @@ interface Message {
   sender: string;
 }
 
-export default function testttt() {
+export default function Test() {
   const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
     setMessages([{ id: 1, text: "Welcome to the chat!", sender: "bot" }]);
   }, []);
 
-  const [messageIdCounter, setMessageIdCounter] = useState(2);
+  // const [messageIdCounter, setMessageIdCounter] = useState(2);
 
   const [inputMessage, setInputMessage] = useState("");
   // const [response, setResponse] = useState<string>("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
 
   // Create a ref for the messages container
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -48,49 +48,49 @@ export default function testttt() {
     if (inputMessage.trim() === "") return;
 
     setLoading(true);
-    setError("");
+    // setError("");
     // Clear input
     setInputMessage("");
 
     // Add user message
-    const userMessage = {
-      id: messageIdCounter,
-      text: inputMessage,
-      sender: "user",
-    };
+    // const userMessage = {
+    //   id: messageIdCounter,
+    //   text: inputMessage,
+    //   sender: "user",
+    // };
 
-    setMessages((prevMessages) => [...prevMessages, userMessage]);
+    // setMessages((prevMessages) => [...prevMessages, userMessage]);
 
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ question: inputMessage }),
-      });
+    // try {
+    //   const res = await fetch("/api/chat", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ question: inputMessage }),
+    //   });
 
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || "Failed to get response");
-      }
+    //   if (!res.ok) {
+    //     const errorData = await res.json();
+    //     throw new Error(errorData.error || "Failed to get response");
+    //   }
 
-      const data: ChatResponse = await res.json();
+    //   const data: ChatResponse = await res.json();
 
-      const botMessage = {
-        id: messageIdCounter + 1,
-        text: data.answer,
-        sender: "bot",
-      };
+    //   const botMessage = {
+    //     id: messageIdCounter + 1,
+    //     text: data.answer,
+    //     sender: "bot",
+    //   };
 
-      setMessageIdCounter(messageIdCounter + 2);
-      setMessages((prevMessages) => [...prevMessages, botMessage]);
-    } catch (err: any) {
-      setError(err.message || "Something went wrong");
-      console.error("Error:", err);
-    } finally {
-      setLoading(false);
-    }
+    //   setMessageIdCounter(messageIdCounter + 2);
+    //   setMessages((prevMessages) => [...prevMessages, botMessage]);
+    // } catch (err: any) {
+    //   setError(err.message || "Something went wrong");
+    //   console.error("Error:", err);
+    // } finally {
+    //   setLoading(false);
+    // }
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     // Send message on Enter key
