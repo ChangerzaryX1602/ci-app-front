@@ -1,10 +1,9 @@
 import React from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Home = () => {
-  const router = useRouter();
   return (
     <div id="home" className="h-[80vh] w-4/5 flex justify-between items-center">
       <div className="w-2/5">
@@ -45,13 +44,11 @@ const Home = () => {
           Seamless conversations. Intelligent answers. A smarter way to explore
           knowledge.
         </p>
-
-        <button
-          className="rounded-full border-2 border-purple-500 text-purple-500 px-6 py-2 text-lg font-semibold hover:bg-purple-500 hover:text-white transition"
-          onClick={() => router.push("/testside")}
-        >
-          Get Started
-        </button>
+        <Link href="https://oauth.kku.ac.th/authorize?response_type=code&&client_id=e8fdb4894be17a3a&&redirect_uri=http://localhost:3000/callback">
+          <button className="rounded-full border-2 border-purple-500 text-purple-500 px-6 py-2 text-lg font-semibold hover:bg-purple-500 hover:text-white transition">
+            Get Started
+          </button>
+        </Link>
       </div>
     </div>
   );
