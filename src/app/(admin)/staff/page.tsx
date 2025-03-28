@@ -28,6 +28,8 @@ export default function AdminPageMock() {
                 return {
                     "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [".docx"],
                 };
+            case "json" :
+                return { "application/json": [".json"] };
             case "image":
                 return { "image/*": [".png", ".jpg", ".jpeg"] };
             default:
@@ -35,12 +37,13 @@ export default function AdminPageMock() {
         }
     };
 
-    const { getRootProps, getInputProps, } = useDropzone({
+    const { getRootProps, getInputProps } = useDropzone({
         onDrop,
         accept: getAcceptTypes(type),
-        maxFiles: 1,
-        disabled: type === "link",
-    });
+        maxFiles: 1, 
+        multiple: false, 
+        disabled: type === "link" || selectedFile !== null,
+      });
 
     return (
         <div className="min-h-screen bg-gray-950 text-white p-8 space-y-10">
@@ -89,6 +92,7 @@ export default function AdminPageMock() {
                         <option value="pdf">PDF</option>
                         <option value="docx">DOCX</option>
                         <option value="image">Image</option>
+                        <option value="json">Json</option>
                         <option value="link">Website (URL)</option>
                     </select>
 
