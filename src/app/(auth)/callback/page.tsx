@@ -1,20 +1,30 @@
 "use client";
 import React, { Suspense, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { DotWave } from "ldrs/react";
+import "ldrs/react/DotWave.css";
 
 const AuthHandler = () => {
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
+  const router = useRouter();
 
   useEffect(() => {
     const handleAuth = async (code: string) => {
-      await fetch("/api/auth", {
+      const res = await fetch("/api/auth", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ code }),
       });
+
+      if (!res.ok) {
+        router.push("/");
+        // throw new Error("Failed to authenticate");
+      }
+
+      router.push("/chat");
     };
 
     if (code) {
@@ -27,11 +37,11 @@ const AuthHandler = () => {
 
 const Page = () => {
   return (
-    <div>
+    <div className="w-full h-screen flex justify-center items-center">
       <Suspense fallback={<div>Loading...</div>}>
         <AuthHandler />
       </Suspense>
-      Page
+      <DotWave size="47" speed="1" color="black" />
     </div>
   );
 };
