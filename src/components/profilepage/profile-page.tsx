@@ -74,14 +74,14 @@ const profiles: Profile[] = [
 
 export default function ProfilePage() {
   return (
-    <div className="w-full items-center flex flex-wrap gap-8">
+    <div className="w-full items-center flex flex-wrap gap-8 lg:justify-center">  
       <div className="hidden lg:flex w-full justify-between gap-8">
         {profiles.slice(0, 3).map((profile, index) => (
           <ProfileCard key={index} profile={profile} />
         ))}
       </div>
 
-      <div className="hidden lg:flex w-full justify-around gap-8 mt-4">
+        <div className="hidden lg:flex w-full justify-around gap-8 mt-4 lg:w-2/3 ">
         {profiles.slice(3).map((profile, index) => (
           <ProfileCard key={index} profile={profile} />
         ))}

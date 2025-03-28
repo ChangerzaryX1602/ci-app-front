@@ -109,7 +109,7 @@ const items = [
 
 const Help = () => {
   return (
-    <div id="help" className="w-4/5 lg:w-auto md:mt-36 mb-36 text-center">
+    <div id="help" className="w-4/5 mb-36 lg:w-4/5 md:mt-36  text-center xl:w-3/5">
       <div className="text-3xl font-bold text-purple-600 aa">Help</div>
       <p className="m-3">
         Welcome! We&apos;re here to help you solve problems and answer
@@ -137,7 +137,7 @@ const Help = () => {
                   https://reg.kku.ac.th/
                 </a>
                 , where students can register for 1-15 credits.
-              </li>
+              </li>/
               <li>
                 Confirm the registration and make payment through a bank or via
                 QR code, as specified on the fee invoice. This must be done
@@ -148,21 +148,21 @@ const Help = () => {
           </div>
         </div>
       </div>
-
       <h2 className="font-bold text-lg underline mt-3">Categories</h2>
-      <Accordion type="single" collapsible>
-        {items.map((item) => (
-          <AccordionItem key={item.value} value={item.value}>
-            <AccordionTrigger className="text-base text-start">
-              {item.label}
-            </AccordionTrigger>
-            <AccordionContent className="text-base text-start">
-              {item.content}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
-
+      <div className="md:flex flex-col items-center text-start">
+        <Accordion type="single" collapsible className="md:w-9/12 xl:w-10/12">
+          {items.map((item) => (
+            <AccordionItem key={item.value} value={item.value}>
+              <AccordionTrigger className="text-base text-start ">
+                {item.label}
+              </AccordionTrigger>
+              <AccordionContent className="text-base text-start">
+                {item.content}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
       <h2 className="font-bold text-lg underline mt-3">Contact KKU</h2>
       <p>Email: reg@kku.ac.th</p>
     </div>
