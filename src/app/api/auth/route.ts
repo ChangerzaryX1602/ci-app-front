@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
 export async function POST(request: NextRequest) {
-  // try {
   const { code } = await request.json();
   const res = await fetch(`${process.env.API_ENDPOINT}/api/v1/auth`, {
     method: "POST",
@@ -16,12 +15,10 @@ export async function POST(request: NextRequest) {
     throw new Error("Failed to authenticate");
   }
 
-  const data = await res.json();
+  const data = await res.json();  
+  const username = data.messages.toString().split(" ")[0] + " " + data.messages.toString().split(" ")[1];
 
-  (await cookies()).set("token", data.result.token)
+  (await cookies()).set("token", data.result.token);
 
-  return NextResponse.json({ message: "Success" });
-  // } catch (error) {
-  //   return NextResponse.json({ message: error });
-  // }
+  return NextResponse.json({ message: "Success", username: username });
 }

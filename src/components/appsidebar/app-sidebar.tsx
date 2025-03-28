@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, } from "react";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 import {
   Sidebar,
   SidebarContent,
@@ -20,13 +20,22 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 
-import { SquarePen, Ellipsis } from "lucide-react";
+import { SquarePen, Ellipsis, } from "lucide-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Input } from "@/components/ui/input";
 import DialogDeletePlaceHolder from "../dialog/dialog-delete-history";
 import { useDeleteChatTrigger } from "@/lib/delete-chat-trigger-context";
 import { useSidebarTrigger } from "@/lib/sidebar-trigger-context";
 import { usePathname } from "next/navigation";
+import { NavUser } from "../navuser/nav-user";
+
+const data = {
+  user: {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg",
+  },
+}
 
 interface History {
   id: number;
@@ -122,9 +131,9 @@ export function AppSidebar() {
       prevHistory.map((data: History) =>
         data.history_id === editingId
           ? {
-              ...data,
-              history: { ...data.history, place_holder: editedPlaceholder },
-            }
+            ...data,
+            history: { ...data.history, place_holder: editedPlaceholder },
+          }
           : data
       )
     );
@@ -206,7 +215,7 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         <span className="flex items-center space-x-2 content-center">
-          <Image
+          {/* <Image
             src={"/images/kku-icon.png"}
             alt={"None"}
             width={50}
@@ -217,7 +226,8 @@ export function AppSidebar() {
             alt={"None"}
             width={50}
             height={50}
-          />
+          /> */}
+          <NavUser user={data.user }/>
         </span>
       </SidebarFooter>
     </Sidebar>
