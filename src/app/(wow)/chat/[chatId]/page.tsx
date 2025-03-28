@@ -5,53 +5,75 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Bouncy } from "ldrs/react";
 import "ldrs/react/Bouncy.css";
-import { useRouter } from "next/navigation";
-import { useSidebarTrigger } from "@/lib/sidebar-trigger-context";
+import { usePathname, useRouter } from "next/navigation";
+import { useDeleteChatTrigger } from "@/lib/delete-chat-trigger-context";
 
 interface ChatResponse {
   answer: string;
-  historyId: number;
 }
 
 interface Message {
-  id: number;
+  id: string;
   text: string;
   sender: string;
 }
 
-const Testside = () => {
+interface HistoryMessages {
+  history: {
+    id: number;
+    place_holder: string;
+  };
+  history_id: number;
+  id: number;
+  message: {
+    answer: string;
+    created_at: string;
+    id: number;
+    question: string;
+  };
+  message_id: number;
+}
+
+const Page = ({ params }: { params: Promise<{ chatId: number }> }) => {
+  const resolvedParams = React.use(params);
+  const chatId = resolvedParams.chatId;
+
   const [messages, setMessages] = useState<Message[]>([]);
-
-  useEffect(() => {
-    setMessages([{ id: 1, text: "Welcome to the chat!", sender: "bot" }]);
-  }, []);
-
   const [messageIdCounter, setMessageIdCounter] = useState(2);
 
   const [inputMessage, setInputMessage] = useState("");
-  // const [response, setResponse] = useState<string>("");
   const [loading, setLoading] = useState(false);
-
-  // For handle error hydation
   const [isClient, setIsClient] = useState(false);
   const [botIsAnswer, setBotIsAnswer] = useState(false);
-  const router = useRouter();
 
-  const { createSidebarTrigger } = useSidebarTrigger();
+  const pathname = usePathname();
+  const { trigger, historyIdSave } = useDeleteChatTrigger();
+  const router = useRouter();
+  // Store the previous trigger value
+  const prevTriggerRef = useRef(trigger);
+
+  useEffect(() => {
+    if (trigger !== prevTriggerRef.current) {
+      if (pathname.includes(historyIdSave.toString())) {
+        console.log("Navigating away from deleted chat");
+        router.push("/chat");
+      }
+
+      // Update the previous trigger reference
+      prevTriggerRef.current = trigger;
+    }
+  }, [trigger]);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  // Create a ref for the messages container
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Function to scroll to the bottom
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Scroll to bottom whenever messages change
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -64,9 +86,10 @@ const Testside = () => {
     // Clear input
     setInputMessage("");
 
+    const currentTime = Date.now();
     // Add user message
     const userMessage = {
-      id: messageIdCounter,
+      id: `user_${currentTime}_${messageIdCounter}`,
       text: inputMessage,
       sender: "user",
     };
@@ -74,52 +97,98 @@ const Testside = () => {
     setMessages((prevMessages) => [...prevMessages, userMessage]);
 
     const botMessage = {
-      id: messageIdCounter + 1,
+      id: `bot_${currentTime}_${messageIdCounter + 1}`,
       text: "",
       sender: "bot",
     };
+    console.log("chatId, inputMessage", chatId, inputMessage);
 
-    // try {
-    const res = await fetch("/api/create-history", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ question: inputMessage }),
-    });
-
-    if (!res.ok) {
-      const errorData = await res.json();
-      botMessage.text = errorData.error;
-      setMessageIdCounter(messageIdCounter + 2);
-      setMessages((prevMessages) => [...prevMessages, botMessage]);
-      setLoading(false);
-      setBotIsAnswer(false);
-      throw new Error(errorData.error || "Failed to get response");
-    }
-
-    const data: ChatResponse = await res.json();
-
+    const data: ChatResponse = await askChatbot(chatId, inputMessage);
     botMessage.text = data.answer;
-    // } catch (err: any) {
-    //   botMessage.text = err.message;
-    //   console.error("Error:", err);
-    // } finally {
     setMessageIdCounter(messageIdCounter + 2);
     setMessages((prevMessages) => [...prevMessages, botMessage]);
     setLoading(false);
     setBotIsAnswer(false);
-    createSidebarTrigger();
-    router.replace(`/chat/${data.historyId}`);
-
-    // }
   };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !botIsAnswer) {
       e.preventDefault();
       handleSendMessage();
     }
   };
+
+  const askChatbot = async (historyId: number, question: string) => {
+    const res = await fetch("/api/ask", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ historyId, question }),
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.error || "Failed to get response");
+    }
+
+    const data: ChatResponse = await res.json();
+    return data;
+  };
+
+  useEffect(() => {
+    // if (isMounted) return;
+    let isMounted = true;
+
+    const loadHistoryMessages = async (historyId: number) => {
+      // setIsMounted(true);
+      const res = await fetch(
+        `/api/get-history-message?historyId=${historyId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Failed to get response");
+      }
+
+      const data = await res.json();
+      const allHistoryMessage = data.history;
+
+      if (isMounted) {
+        const newMessages: Message[] = allHistoryMessage.flatMap(
+          (message: HistoryMessages) => [
+            {
+              id: `user_${historyId}_${message.id}`, // Add historyId to ensure uniqueness
+              text: message.message.question,
+              sender: "user",
+            },
+            {
+              id: `bot_${historyId}_${message.id}`, // Add historyId to ensure uniqueness
+              text: message.message.answer,
+              sender: "bot",
+            },
+          ]
+        );
+
+        setMessages(newMessages);
+      }
+    };
+
+    // Reset messages before loading new ones
+    setMessages([]);
+    loadHistoryMessages(chatId);
+
+    // Cleanup function
+    return () => {
+      isMounted = false;
+    };
+  }, [chatId]);
 
   return (
     <div className="w-full flex flex-col items-center h-full">
@@ -172,7 +241,7 @@ const Testside = () => {
                   onClick={handleSendMessage}
                 >
                   <Image
-                    src="button.svg"
+                    src="/button.svg"
                     alt="button"
                     width={25}
                     height={25}
@@ -188,4 +257,4 @@ const Testside = () => {
   );
 };
 
-export default Testside;
+export default Page;

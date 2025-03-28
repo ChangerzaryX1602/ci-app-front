@@ -22,7 +22,7 @@ export default function ProfileCard({ profile }: ProfileCardProps) {
     const { name, role, image, socialLinks } = profile;
 
     return (
-        <Card className="w-80 shadow-lg rounded-2xl overflow-hidden">
+        <Card className="w-4/5 md:w-80 shadow-lg rounded-2xl overflow-hidden">
             <div className="bg-blue-600 h-20 w-full"></div>
             <div className="flex justify-center -mt-10">
                 <Image
