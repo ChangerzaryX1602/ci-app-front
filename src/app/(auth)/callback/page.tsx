@@ -23,7 +23,8 @@ const AuthHandler = () => {
         router.push("/");
         // throw new Error("Failed to authenticate");
       }
-
+      const data = await res.json();
+      localStorage.setItem("name", data.username);
       router.push("/chat");
     };
 
