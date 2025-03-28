@@ -4,12 +4,13 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
+} from "@/components/ui/accordion";
 
 const items = [
   {
     value: "item-1",
-    label: "Registration / Student Status Maintenance / Leave of Absence / Withdrawal",
+    label:
+      "Registration / Student Status Maintenance / Leave of Absence / Withdrawal",
     content: (
       <>
         <ul className="list-disc ml-6">
@@ -29,7 +30,9 @@ const items = [
       <>
         <ul className="list-disc ml-6">
           <li>Steps for submitting English test/training results</li>
-          <li>English proficiency requirements for thesis/dissertation examination</li>
+          <li>
+            English proficiency requirements for thesis/dissertation examination
+          </li>
         </ul>
       </>
     ),
@@ -75,7 +78,8 @@ const items = [
   },
   {
     value: "item-6",
-    label: "Thesis / Dissertation / Independent Study Examination and Submission",
+    label:
+      "Thesis / Dissertation / Independent Study Examination and Submission",
     content: (
       <>
         <ul className="list-disc ml-6">
@@ -103,51 +107,58 @@ const items = [
   },
 ];
 
-
-
-
 const Help = () => {
   return (
-    <div id="help" className="mt-36 mb-36 text-center">
+    <div id="help" className="w-4/5 lg:w-auto md:mt-36 mb-36 text-center">
       <div className="text-3xl font-bold text-purple-600 aa">Help</div>
-      <p className="m-3">Welcome! We&apos;re here to help you solve problems and answer questions.</p>
-
+      <p className="m-3">
+        Welcome! We&apos;re here to help you solve problems and answer
+        questions.
+      </p>
 
       <div className="border-2 border-gray-300 rounded-lg overflow-hidden max-w-3xl mx-auto">
-      <h2 className="font-bold text-lg underline text-center py-2 bg-gray-100 border-b border-gray-300">
-        Frequently Asked Questions
-      </h2>
-      <div className="p-5 text-left">
-        <p>
-          <span className="font-semibold mb-2">Q: </span> What are the standard registration procedures?
-        </p>
-        <div className="flex items-start mt-2">
-          <p className="font-semibold mr-2">A: </p>
-          <ul className="list-disc ml-4 space-y-2 text-left">
-            <li>
-              Registration must be completed via-
-              <a 
-                href="https://reg.kku.ac.th/" 
-                className="underline text-blue-600 hover:text-blue-800 ml-1"
-              >
-                https://reg.kku.ac.th/
-              </a>, where students can register for 1-15 credits.
-            </li>
-            <li>
-              Confirm the registration and make payment through a bank or via QR code, as specified on the fee invoice. This must be done within the dates and times specified in the university&apos;s academic calendar, which is announced annually.
-            </li>
-          </ul>
+        <h2 className="font-bold text-lg underline text-center py-2 bg-gray-100 border-b border-gray-300">
+          Frequently Asked Questions
+        </h2>
+        <div className="p-5 text-left">
+          <p>
+            <span className="font-semibold mb-2">Q: </span> What are the
+            standard registration procedures?
+          </p>
+          <div className="flex items-start mt-2">
+            <p className="font-semibold mr-2">A: </p>
+            <ul className="list-disc ml-4 space-y-2 text-left">
+              <li>
+                Registration must be completed via-
+                <a
+                  href="https://reg.kku.ac.th/"
+                  className="underline text-blue-600 hover:text-blue-800 ml-1"
+                >
+                  https://reg.kku.ac.th/
+                </a>
+                , where students can register for 1-15 credits.
+              </li>
+              <li>
+                Confirm the registration and make payment through a bank or via
+                QR code, as specified on the fee invoice. This must be done
+                within the dates and times specified in the university&apos;s
+                academic calendar, which is announced annually.
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-      
-         
+
       <h2 className="font-bold text-lg underline mt-3">Categories</h2>
       <Accordion type="single" collapsible>
         {items.map((item) => (
           <AccordionItem key={item.value} value={item.value}>
-            <AccordionTrigger className="text-base text-start">{item.label}</AccordionTrigger>
-            <AccordionContent className="text-base text-start">{item.content}</AccordionContent>
+            <AccordionTrigger className="text-base text-start">
+              {item.label}
+            </AccordionTrigger>
+            <AccordionContent className="text-base text-start">
+              {item.content}
+            </AccordionContent>
           </AccordionItem>
         ))}
       </Accordion>

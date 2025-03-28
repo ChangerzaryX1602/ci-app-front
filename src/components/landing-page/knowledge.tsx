@@ -12,9 +12,9 @@ const Knowledge = () => {
     "FAQs on studies & exams",
   ];
   return (
-    <Card className="w-3/5">
+    <Card className="w-4/5 xl:w-3/5">
       <CardContent className="font-medium mt-6">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {data.map((item, index) => {
             return (
               <div key={index} className="flex space-x-2">
