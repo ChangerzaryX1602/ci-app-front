@@ -15,5 +15,6 @@ export const config = {
     // Exclude login route from this middleware to prevent redirection loop
     matcher: [
         "/testside/:path*",
+        "/chat/:path*",
     ],
 };

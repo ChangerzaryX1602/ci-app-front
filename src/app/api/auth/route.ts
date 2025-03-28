@@ -4,7 +4,6 @@ import { cookies } from "next/headers";
 export async function POST(request: NextRequest) {
   // try {
   const { code } = await request.json();
-  console.log("code", code);
   const res = await fetch(`${process.env.API_ENDPOINT}/api/v1/auth`, {
     method: "POST",
     headers: {

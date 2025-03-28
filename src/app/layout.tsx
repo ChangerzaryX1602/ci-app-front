@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { NavbarTriggerProvider } from "@/lib/nav-bar-trigger-context";
+import { DeleteChatTriggerProvider } from "@/lib/delete-chat-trigger-context";
+import { SidebarTriggerProvider } from "@/lib/sidebar-trigger-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +37,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NavbarTriggerProvider>{children}</NavbarTriggerProvider>
+          <NavbarTriggerProvider>
+            <SidebarTriggerProvider>
+              <DeleteChatTriggerProvider>{children}</DeleteChatTriggerProvider>
+            </SidebarTriggerProvider>
+          </NavbarTriggerProvider>
         </ThemeProvider>
       </body>
     </html>
