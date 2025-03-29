@@ -117,7 +117,7 @@ const Help = () => {
       </p>
 
       <div className="border-2 border-gray-300 rounded-lg overflow-hidden max-w-3xl mx-auto">
-        <h2 className="font-bold text-lg underline text-center py-2 bg-gray-100 border-b border-gray-300">
+        <h2 className="font-bold text-lg underline text-center py-2 bg-gray-100 border-b border-gray-300 dark:bg-black">
           Frequently Asked Questions
         </h2>
         <div className="p-5 text-left">

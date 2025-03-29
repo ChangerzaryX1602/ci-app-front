@@ -36,7 +36,7 @@ const TimelineHeader = React.forwardRef<
       "after:absolute after:left-2 after:box-content after:h-2 after:w-2 after:-translate-x-1/2 after:translate-y-1.5 after:rounded-full",
       "after:border-4 after:border-primary-foreground/95",
       isActive
-        ? "after:bg-black" // Black circle for current page
+        ? "after:bg-black dark:after:bg-yellow-500" // Black circle for current page
         : "after:bg-gray-300", // Gray circle for other pages
       "group-last:before:hidden sm:flex-row sm:before:left-0 sm:before:ml-[10rem] sm:after:left-0 sm:after:ml-[10rem]",
       className

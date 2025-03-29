@@ -2,6 +2,7 @@ import React from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import Image from "next/image";
 import Link from "next/link";
+import { ThemeButton } from "../button/theme-button";
 
 const Home = () => {
   return (
@@ -27,7 +28,7 @@ const Home = () => {
           </span>
           <span>
             <div className="flex items-center space-x-4 mt-2 mr-6 md:mr-0 md:mt-6">
-              <span className="text-gray-500 text-sm">Powered by</span>
+              <span className="text-gray-500 text-sm dark:text-white">Powered by</span>
               <Image
                 src="/landing-page/kku-logo.svg"
                 alt="kku-logo"
@@ -46,21 +47,22 @@ const Home = () => {
           </span>
         </div>
         <div className="text-gray-700 font-semibold text-lg">
-          <span className="text-[#5A2D59] font-bold">
+          <span className="text-[#5A2D59] font-bold dark:text-white">
             Welcome to the Future of AI at the Faculty of Engineering, Khon Kaen
             University
           </span>
         </div>
-        <p className="text-gray-600 text-lg">
+        <p className="text-gray-600 text-lg dark:text-white">
           Seamless conversations. Intelligent answers. A smarter way to explore
           knowledge.
         </p>
-        <div className="flex justify-center md:justify-start">
-          <button className="rounded-full border-2 border-purple-500 text-purple-500 px-6 py-2 text-lg font-semibold hover:bg-purple-500 hover:text-white transition mt-4">
+        <div className="flex justify-center md:justify-start items-center space-x-4">
+          <button className="rounded-full border-2 border-purple-500 text-purple-500 px-6 py-2 text-lg font-semibold hover:bg-purple-500 hover:text-white transition">
             <Link href="https://oauth.kku.ac.th/authorize?response_type=code&&client_id=e8fdb4894be17a3a&&redirect_uri=http://localhost:3000/callback">
               Get Started
             </Link>
           </button>
+          <ThemeButton />
         </div>
       </div>
     </div>

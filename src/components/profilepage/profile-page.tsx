@@ -36,8 +36,8 @@ const profiles: Profile[] = [
     about: "Noey",
     socialLinks: {
       facebook: "https://www.facebook.com/naruebet.sriwarom",
-      linkedin: "https://www.linkedin.com/in/naruebet-sriwarom-680012316/",
-      github: "https://github.com/bste101",
+      linkedin: "https://www.linkedin.com/in/jidaakku/",
+      github: "https://github.com/jidakku",
     },
   },
   {
@@ -60,7 +60,7 @@ const profiles: Profile[] = [
     about: "Train",
     socialLinks: {
       facebook: "https://www.facebook.com/trainnakubb",
-      linkedin: "https://www.linkedin.com/in/naruebet-sriwarom-680012316/",
+      linkedin: "https://www.linkedin.com/in/nathachai-ntc/",
       github: "https://github.com/Trainght",
     },
   },
