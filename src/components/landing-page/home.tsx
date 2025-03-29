@@ -28,7 +28,9 @@ const Home = () => {
           </span>
           <span>
             <div className="flex items-center space-x-4 mt-2 mr-6 md:mr-0 md:mt-6">
-              <span className="text-gray-500 text-sm dark:text-white">Powered by</span>
+              <span className="text-gray-500 text-sm dark:text-white">
+                Powered by
+              </span>
               <Image
                 src="/landing-page/kku-logo.svg"
                 alt="kku-logo"
@@ -58,9 +60,7 @@ const Home = () => {
         </p>
         <div className="flex justify-center md:justify-start items-center space-x-4">
           <button className="rounded-full border-2 border-purple-500 text-purple-500 px-6 py-2 text-lg font-semibold hover:bg-purple-500 hover:text-white transition">
-            <Link href="https://oauth.kku.ac.th/authorize?response_type=code&&client_id=e8fdb4894be17a3a&&redirect_uri=http://localhost:3000/callback">
-              Get Started
-            </Link>
+            <Link href={process.env.NEXT_PUBLIC_LOGIN_ENDPOINT as string}>Get Started</Link>
           </button>
           <ThemeButton />
         </div>
