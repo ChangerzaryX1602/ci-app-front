@@ -33,15 +33,6 @@ const ChatNavBar = () => {
           <SidebarTrigger />
         </div>
       )}
-      <div className="w-full flex justify-end pr-4">
-        <Image
-          src="/profiles/best.jpg"
-          width={100}
-          height={100}
-          alt="profile"
-          className="w-10 rounded-full"
-        />
-      </div>
     </div>
   );
 };

@@ -13,7 +13,7 @@ const Page = () => {
 
   return (
     <div className="relative w-full min-h-screen flex">
-      <div className="hidden fixed top-1/2 z-10">
+      <div className="hidden xl:flex fixed top-1/2 z-50">
         <TimelineLayout activeSection={activeSection} />
       </div>
       <div className="absolute top-0 w-full z-0">
@@ -25,8 +25,8 @@ const Page = () => {
           className="w-full"
         />
       </div>
-      <div className="w-full flex flex-col items-center z-20">
-      <div className="bg-orange-400 sm:bg-slate-900 md:bg-blue-600 lg:bg-red-800 xl:bg-pink-700 2xl:bg-purple-600 mt-60">sdfsdf</div>
+      <div className="w-full flex flex-col items-center z-20 mt-32 xl:mt-64">
+      {/* <div className="bg-orange-400 sm:bg-slate-900 md:bg-blue-600 lg:bg-red-800 xl:bg-pink-700 2xl:bg-purple-600 mt-60">sdfsdf</div> */}
         <Home />
         <Knowledge />
         <AboutUS />
