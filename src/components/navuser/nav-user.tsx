@@ -4,8 +4,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -14,6 +16,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { UserRoundCog } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export function NavUser({
   user,
@@ -25,6 +29,8 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
+  const router = useRouter();
+
   const handleLogout = async () => {
     const res = await fetch("/api/logout", {
       method: "GET",
@@ -37,6 +43,7 @@ export function NavUser({
       window.location.href = "/";
     }
   };
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -75,6 +82,14 @@ export function NavUser({
                 </div>
               </div>
             </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem onClick={() => router.push("/staff")}>
+                <UserRoundCog />
+                Staff
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout}>
               <LogOut />
               Log out
