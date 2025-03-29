@@ -180,7 +180,7 @@ export function AppSidebar() {
                         <Link
                           href={`/chat/${history_id}`}
                           className={`${
-                            pathname.includes(history_id) && "bg-gray-200"
+                            pathname.includes(history_id) && "bg-gray-200 dark:bg-gray-700"
                           }`}
                         >
                           <span>{data.history.place_holder}</span>

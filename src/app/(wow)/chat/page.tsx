@@ -7,6 +7,7 @@ import { Bouncy } from "ldrs/react";
 import "ldrs/react/Bouncy.css";
 import { useRouter } from "next/navigation";
 import { useSidebarTrigger } from "@/lib/sidebar-trigger-context";
+import { useTheme } from "next-themes";
 
 interface ChatResponse {
   answer: string;
@@ -21,6 +22,7 @@ interface Message {
 
 const Testside = () => {
   const [messages, setMessages] = useState<Message[]>([]);
+  const { theme } = useTheme();
 
   useEffect(() => {
     setMessages([{ id: 1, text: "Welcome to the chat!", sender: "bot" }]);
@@ -149,7 +151,11 @@ const Testside = () => {
             ))}
             {loading && (
               <div className="pt-4 pl-2">
-                <Bouncy size="30" speed="1.75" color="black" />
+                <Bouncy
+                  size="30"
+                  speed="1.75"
+                  color={`${theme == "dark" ? "white" : "black"}`}
+                />
               </div>
             )}
             <div ref={messagesEndRef} />
@@ -163,7 +169,7 @@ const Testside = () => {
                   onChange={(e) => setInputMessage(e.target.value)}
                   onKeyDown={handleKeyDown}
                   placeholder="Type your question here..."
-                  className="pt-6 pb-6 rounded-xl bg-white z-10 "
+                  className="pt-6 pb-6 rounded-xl bg-white z-10 text-black"
                 />
                 <Button
                   variant="link"

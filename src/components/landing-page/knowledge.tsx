@@ -12,7 +12,7 @@ const Knowledge = () => {
     "FAQs on studies & exams",
   ];
   return (
-    <Card className="w-4/5 xl:w-3/5">
+    <Card className="w-4/5 xl:w-3/5 dark:border-gray-700">
       <CardContent className="font-medium mt-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ">
           {data.map((item, index) => {

@@ -7,6 +7,7 @@ import { Bouncy } from "ldrs/react";
 import "ldrs/react/Bouncy.css";
 import { usePathname, useRouter } from "next/navigation";
 import { useDeleteChatTrigger } from "@/lib/delete-chat-trigger-context";
+import { useTheme } from "next-themes";
 
 interface ChatResponse {
   answer: string;
@@ -37,6 +38,8 @@ interface HistoryMessages {
 const Page = ({ params }: { params: Promise<{ chatId: number }> }) => {
   const resolvedParams = React.use(params);
   const chatId = resolvedParams.chatId;
+
+  const { theme } = useTheme();
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageIdCounter, setMessageIdCounter] = useState(2);
@@ -218,7 +221,11 @@ const Page = ({ params }: { params: Promise<{ chatId: number }> }) => {
             ))}
             {loading && (
               <div className="pt-4 pl-2">
-                <Bouncy size="30" speed="1.75" color="black" />
+                <Bouncy
+                  size="30"
+                  speed="1.75"
+                  color={`${theme == "dark" ? "white" : "black"}`}
+                />
               </div>
             )}
             <div ref={messagesEndRef} />
@@ -232,7 +239,7 @@ const Page = ({ params }: { params: Promise<{ chatId: number }> }) => {
                   onChange={(e) => setInputMessage(e.target.value)}
                   onKeyDown={handleKeyDown}
                   placeholder="Type your question here..."
-                  className="pt-6 pb-6 rounded-xl bg-white z-10 "
+                  className="pt-6 pb-6 rounded-xl bg-white z-10 text-black"
                 />
                 <Button
                   variant="link"

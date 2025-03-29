@@ -3,6 +3,7 @@ import React, { Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { DotWave } from "ldrs/react";
 import "ldrs/react/DotWave.css";
+import { useTheme } from "next-themes";
 
 const AuthHandler = () => {
   const searchParams = useSearchParams();
@@ -37,12 +38,17 @@ const AuthHandler = () => {
 };
 
 const Page = () => {
+  const { theme } = useTheme();
   return (
     <div className="w-full h-screen flex justify-center items-center">
       <Suspense fallback={<div>Loading...</div>}>
         <AuthHandler />
       </Suspense>
-      <DotWave size="47" speed="1" color="black" />
+      <DotWave
+        size="47"
+        speed="1"
+        color={`${theme == "dark" ? "white" : "black"}`}
+      />
     </div>
   );
 };

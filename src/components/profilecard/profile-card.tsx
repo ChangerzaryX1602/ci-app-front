@@ -37,8 +37,8 @@ export default function ProfileCard({ profile }: ProfileCardProps) {
 
       <CardHeader className="text-center">
         <CardTitle className="text-lg font-bold">{name}</CardTitle>
-        <p className="text-gray-500 text-sm">{student_id}</p>
-        <p className="text-gray-500 text-sm">{role}</p>
+        <p className="text-gray-500 text-sm dark:text-gray-300">{student_id}</p>
+        <p className="text-gray-500 text-sm dark:text-gray-300">{role}</p>
       </CardHeader>
 
       <CardContent className="flex justify-center gap-3">
